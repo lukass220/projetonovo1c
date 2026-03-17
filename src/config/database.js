@@ -17,18 +17,19 @@ const db = new sqlite3.Database(dbPath, (erro) => {
 // Criar a tabela se não existir (executado ao iniciar o servidor)
 db.serialize(() => {
   db.run(`
-    CREATE TABLE IF NOT EXISTS produtos (
-      id        INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome      varchar(80)    NOT NULL,
-      preco     decimal(10,2)    NOT NULL,
-      estoque   INTEGER NOT NULL,
-      categoria varchar(50)    NOT NULL
+    CREATE TABLE IF NOT EXISTS clientes (
+      INT AUTO_INCREMENT PRIMARY KEY,
+    nome        VARCHAR(120),
+    cpf         VARCHAR(14),
+    email       VARCHAR(100),
+    telefone    VARCHAR(20),
+    endereco     VARCHAR(200)
     )
   `, (erro) => {
     if (erro) {
       console.error('❌ Erro ao criar tabela:', erro);
     } else {
-      console.log('✅ Tabela produtos verificada/criada');
+      console.log('✅ Tabela clientes verificada/criada');
     }
   });
 });

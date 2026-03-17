@@ -18,15 +18,15 @@ app.use(express.json());
 // IMPORTAR ROTAS
 // ============================================================
 
-// Importar as rotas de produtos
-const produtoRoutes = require('./src/routes/produtoRoutes');
+// Importar as rotas de clientes
+const clienteRoutes = require('./src/routes/clienteRoutes');
 
 // ============================================================
 // REGISTRAR ROTAS
 // ============================================================
 
-// Todas as rotas de produtos ficarão disponíveis em /produtos
-app.use('/produtos', produtoRoutes);
+// Todas as rotas de clientes ficarão disponíveis em /clientes
+app.use('/clientes', clienteRoutes);
 
 // ============================================================
 // ROTA RAIZ (Boas-vindas)
@@ -34,16 +34,16 @@ app.use('/produtos', produtoRoutes);
 
 app.get('/', (req, res) => {
   res.json({ 
-    mensagem: 'API de Produtos com SQLite - Bem-vindo!',
+    mensagem: 'API de Clientes com SQLite - Bem-vindo!',
     versao: '2.0',
     banco: 'SQLite',
     rotas_disponiveis: {
-      listar_todos: 'GET /produtos',
-      buscar_por_id: 'GET /produtos/:id',
-      buscar_por_categoria: 'GET /produtos/categoria/:categoria',
-      criar: 'POST /produtos',
-      atualizar: 'PUT /produtos/:id',
-      deletar: 'DELETE /produtos/:id'
+      listar_todos: 'GET /clientes',
+      buscar_por_id: 'GET /clientes/:id',
+      buscar_por_cidade: 'GET /clientes/cidade/:cidade',
+      criar: 'POST /clientes',
+      atualizar: 'PUT /clientes/:id',
+      deletar: 'DELETE /clientes/:id'
     }
   });
 });
@@ -60,10 +60,11 @@ app.listen(PORT, () => {
   console.log(`📂 Arquivo do banco: database.db`);
   console.log('='.repeat(50));
   console.log('📋 Rotas disponíveis:');
-  console.log(`   GET    http://localhost:${PORT}/produtos`);
-  console.log(`   GET    http://localhost:${PORT}/produtos/:id`);
-  console.log(`   POST   http://localhost:${PORT}/produtos`);
-  console.log(`   PUT    http://localhost:${PORT}/produtos/:id`);
-  console.log(`   DELETE http://localhost:${PORT}/produtos/:id`);
+  console.log(`   GET    http://localhost:${PORT}/clientes`);
+  console.log(`   GET    http://localhost:${PORT}/clientes/:id`);
+  console.log(`   GET    http://localhost:${PORT}/clientes/cidade/:cidade`);
+  console.log(`   POST   http://localhost:${PORT}/clientes`);
+  console.log(`   PUT    http://localhost:${PORT}/clientes/:id`);
+  console.log(`   DELETE http://localhost:${PORT}/clientes/:id`);
   console.log('='.repeat(50));
 });
