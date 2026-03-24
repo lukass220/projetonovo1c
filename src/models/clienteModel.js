@@ -48,7 +48,7 @@ function buscarPorId(id) {
 // ============================================================
 function criar(dados) {
   return new Promise((resolve, reject) => {
-    const { nome, email, telefone, cidade } = dados;
+    const { nome, cpf, email, telefone, endereco } = dados;
     
     const sql = `
       INSERT INTO clientes (nome, cpf, email, telefone, endereco)
@@ -65,7 +65,7 @@ function criar(dados) {
           cpf,      
           email,
           telefone,
-          cidade
+          endereco
         });
       }
     });
@@ -82,21 +82,21 @@ function criar(dados) {
 // ============================================================
 function atualizar(id, dados) {
   return new Promise((resolve, reject) => {
-    const { nome, email, telefone, cidade } = dados;
+    const { nome, cpf, email, telefone, endereco } = dados;
     
     const sql = `
       UPDATE clientes 
-      SET nome = ?, email = ?, telefone = ?, cidade = ?
+      SET nome = ?, cpf = ?, email = ?, telefone = ?, endereco = ?
       WHERE id = ?
     `;
     
-    db.run(sql, [nome, email, telefone, cidade, id], function(erro) {
+    db.run(sql, [nome, cpf, email, telefone, endereco, id], function(erro) {
       if (erro) {
         reject(erro);
       } else if (this.changes === 0) {
         resolve(null);
       } else {
-        resolve({ id, nome, email, telefone, cidade });
+        resolve({ id, nome, cpf, email, telefone, endereco});
       }
     });
   });
@@ -128,9 +128,9 @@ function deletar(id) {
 // PARÂMETRO: cidade (string)
 // RETORNO: Promise com array de clientes
 // ============================================================
-function buscarPorCidade(cidade) {
+function buscarPorendereco(endereco) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM clientes WHERE cidade LIKE ?';
+    const sql = 'SELECT * FROM clientes WHERE endereco LIKE ?';
     
     db.all(sql, [`%${endereco}%`], (erro, linhas) => {
       if (erro) {
@@ -151,5 +151,5 @@ module.exports = {
   criar,
   atualizar,
   deletar,
-  buscarPorCidade
+  buscarPorendereco
 };
